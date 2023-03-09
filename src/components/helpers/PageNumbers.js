@@ -10,10 +10,10 @@ function PageNumbers() {
     const pageNumbers = [];
     for (let i = 1; i < 10; i++) {
         pageNumbers.push((
-            <div key={i} onClick={(() => setPage(i))}>
+            <div key={"p-"+i} onClick={(() => setPage(i))}>
                 {
                     page === i
-                    ? (<p style={{ textDecoration: 'underlined'}}>{i}</p>)
+                    ? (<p className="page-selected">{i}</p>)
                     : (<p>{i}</p>)
                 }
             </div>
@@ -21,7 +21,7 @@ function PageNumbers() {
     }
 
     return (
-        <div>
+        <div className="page-numbers">
             {pageNumbers}
         </div>
     )

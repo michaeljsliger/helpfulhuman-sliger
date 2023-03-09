@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import GlobalContext from '../context/context.js';
 import DATASTORE from '../server/db';
+import '../styles/sidebar.css';
 
 function Sidebar() {
-    const {selectRandomColor} = useContext(GlobalContext)
+    const {setSelectedColor, setSearch} = useContext(GlobalContext)
 
     function renderBaseColorsList() {
         return DATASTORE.baseColors.map((el, i) => {
-            // TODO Navigate to first instance of the color
             return (
-                <div key={i}>
+                <div
+                    onClick={() => setSearch(el.toLowerCase())} 
+                    key={i}>
                     <button>
                         {el}
                     </button>
@@ -21,19 +23,16 @@ function Sidebar() {
     const randomColor = () => {
         const id = Math.floor(Math.random() * DATASTORE.colors.length)
         const color = DATASTORE.colors[id]
-        selectRandomColor(color)
+        setSelectedColor(color)
     }
 
     return (
-        <div>
+        <div className="sidebar left">
             { /* TODO change */ }
             <button onClick={() => randomColor()}>
                 Random Color
             </button>
             {renderBaseColorsList()}
-            <p>
-                SIDEBAR
-            </p>
         </div>
     )
 }

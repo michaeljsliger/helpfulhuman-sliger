@@ -6,10 +6,12 @@ import GlobalContextProvider from './context/context.js';
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Header />
-      <Sidebar />
-      <Content />
+      <div className="content-container">
+        <Sidebar />
+        <Content />
+      </div>
     </div>
   );
 }

@@ -3,12 +3,13 @@ import GlobalContext from '../context/context.js';
 import PageNumbers from './helpers/PageNumbers.js';
 import ListView from './helpers/ListView';
 import DetailList from './helpers/DetailList.js';
+import '../styles/content.css';
 // Render List or Detail View
 
 function Content() {
     const { 
         selectedColor, setSelectedColor,
-        page, setPage
+        page, setPage,
     } = useContext(GlobalContext);
 
     if (selectedColor == null) {
@@ -16,7 +17,7 @@ function Content() {
         // List view shows 12 colors per page.
         
         return (
-            <div>
+            <div className="content right">
                 <ListView />
                 <PageNumbers />
             </div>
@@ -26,14 +27,23 @@ function Content() {
     // Otherwise display detail view
     const el = selectedColor
     return (
-        <div>
+        <div className="content right">
             <button onClick={() => setSelectedColor(null)}>
                 Back
             </button>
-            <div key={el.id}>
-                <div style={{ height: '250px', width: '250px', backgroundColor: el.hex }} />
-                <div>
-                    {el.hex}
+            <div
+                className="detail-color-container" 
+                key={el.id}>
+                <div
+                    className="detail-color" 
+                    style={{ backgroundColor: el.hex }} />
+                <div className="color-label">
+                    <div>
+                        {el.hex}
+                    </div>
+                    <div>
+                        {el.name}
+                    </div>
                 </div>
             </div>
             <DetailList />

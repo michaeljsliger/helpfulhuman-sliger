@@ -12,10 +12,14 @@ function DetailList() {
         return el.base === selectedColor.base && el.id !== selectedColor.id
     }); // inclusive
 
-    let detailList = colors.map(el => {
+    let detailList = colors.map((el, i) => {
         return (
-            <div key={el.id} onClick={() => setSelectedColor(el)}>
-                <div style={{ height: '30px', width: '30px', backgroundColor: el.hex }} />
+            <div
+                className="detail-list-container"
+                key={'dl-' + i} onClick={() => setSelectedColor(el)}>
+                <div
+                    className="detail-list-color" 
+                    style={{ backgroundColor: el.hex }} />
                 <div>
                     {el.hex}
                 </div>
@@ -34,7 +38,7 @@ function DetailList() {
     }
 
     return (
-        <div>
+        <div className="detail-list">
             {detailList}
         </div>
     )

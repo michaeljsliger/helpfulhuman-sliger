@@ -5,7 +5,7 @@ import DATASTORE from '../../server/db.js';
 // If we have more than a few helpers, implement a helper interface
 
 function ListView() {
-    const { page, setSelectedColor } = useContext(GlobalContext);
+    const { page, setSelectedColor, search, setColorsIncluded } = useContext(GlobalContext);
 
     // There is a hard-coded limit of 100 colors. There will be a maximum of 9 pages.
     // There will be 12 colors per page.
@@ -14,22 +14,48 @@ function ListView() {
     if (end > 100) {
         end = 100;
     }
-    const colors = DATASTORE.colors.slice(start, end); // inclusive
+
+    let COLORS = DATASTORE.colors;
+
+    // If search is not an empty string, change the dataset.
+    if (search !== '') {
+        COLORS = COLORS.filter(el => {
+            // If the hex or the base includes the substring in search, return true
+            if (el.hex.includes(search) ||
+                el.base.includes(search)) {
+                return true;
+            }
+            return false;
+        })
+
+        // TODO show appropriate number of pages based on colors included in search
+    }
+
+    const colors = COLORS.slice(start, end); // inclusive
 
     const listView = colors.map(el => {
         return (
-            <div key={el.id} onClick={() => setSelectedColor(el)}>
-                <div style={{ height: '30px', width: '30px', backgroundColor: el.hex }} />
-                <div>
-                    {el.hex}
-                    {el.name}
+            <div
+                className="color"
+                key={el.id} 
+                onClick={() => setSelectedColor(el)}>
+                <div
+                    className="color-itself" 
+                    style={{ backgroundColor: el.hex }} />
+                <div className="color-label">
+                    <div>
+                        {el.hex}
+                    </div>
+                    <div>
+                        {el.name}
+                    </div>
                 </div>
             </div>
         )
     })
 
     return (
-        <div>
+        <div className="colors-container">
             {listView}
         </div>
     )
