@@ -1,11 +1,12 @@
-import './styles/App.css';
+import './styles/app.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
+import GlobalContextProvider from './context/context.js';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
       <Sidebar />
       <Content />
