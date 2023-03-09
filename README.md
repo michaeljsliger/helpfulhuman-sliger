@@ -1,6 +1,7 @@
 # MICHAEL SLIGER NOTES
 
 ** HOSTED AT THE ADDRESS BELOW **
+
 https://helpfulhuman-sliger.vercel.app/
 
 I added all of the functionality associated with the challenge.
